@@ -12,6 +12,7 @@ public class SimpleRestClient {
         SimpleRestClient client = new SimpleRestClient();
         client.addPerson();
         client.updatePerson();
+        client.getPersonById();
         client.deletePerson();
     }
 
@@ -47,6 +48,20 @@ public class SimpleRestClient {
 
         HttpEntity<Person> requestEntity = new HttpEntity<>(person, headers);
         restTemplate.put(url, requestEntity);
+    }
+
+    private void getPersonById() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://localhost:8080/person/get/{id}";
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<Person> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Person.class, 1L);
+
+        Person person = responseEntity.getBody();
+        System.out.println(person);
     }
 
     private void deletePerson() {
