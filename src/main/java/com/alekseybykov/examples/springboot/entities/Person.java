@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Data
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column

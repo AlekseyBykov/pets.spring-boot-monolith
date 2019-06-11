@@ -10,10 +10,11 @@ public class SimpleRestClient {
 
     public static void main(String args[]) {
         SimpleRestClient client = new SimpleRestClient();
-        client.addUser();
+        client.addPerson();
+        client.updatePerson();
     }
 
-    private void addUser() {
+    private void addPerson() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -21,6 +22,7 @@ public class SimpleRestClient {
         String url = "http://localhost:8080/person/add";
 
         Person person = new Person();
+        person.setId(1L);
         person.setFirstName("A");
         person.setLastName("B");
 
@@ -29,4 +31,21 @@ public class SimpleRestClient {
 
         System.out.println(uri.getPath());
     }
+
+    public void updatePerson() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://localhost:8080/person/update";
+
+        Person person = new Person();
+        person.setId(1L);
+        person.setFirstName("C");
+        person.setLastName("D");
+
+        HttpEntity<Person> requestEntity = new HttpEntity<>(person, headers);
+        restTemplate.put(url, requestEntity);
+    }
+
 }
