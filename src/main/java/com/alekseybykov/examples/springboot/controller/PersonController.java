@@ -3,6 +3,7 @@ package com.alekseybykov.examples.springboot.controller;
 import com.alekseybykov.examples.springboot.entities.Person;
 import com.alekseybykov.examples.springboot.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
