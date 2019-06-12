@@ -3,20 +3,22 @@ package com.alekseybykov.examples.springboot.controller;
 import com.alekseybykov.examples.springboot.entities.Person;
 import com.alekseybykov.examples.springboot.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("person")
 public class PersonController {
 
+    private final PersonService personService;
+
     @Autowired
-    private PersonService personService;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @PostMapping("add")
     public ResponseEntity<Void> addPerson(@RequestBody Person person, UriComponentsBuilder builder) {
