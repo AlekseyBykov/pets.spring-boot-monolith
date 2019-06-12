@@ -41,7 +41,13 @@ public class PersonController {
     }
 
     @GetMapping("get/{id}")
-    public ResponseEntity<Person> getPersonById(@PathVariable("id") Long id) {
+    public ResponseEntity<Person> getPersonByIdByUsingPathParam(@PathVariable("id") Long id) {
+        Person person = personService.getPersonById(id);
+        return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    @GetMapping("get")
+    public ResponseEntity<Person> getPersonByIdByUsingRequestParam(@RequestParam("id") Long id) {
         Person person = personService.getPersonById(id);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }

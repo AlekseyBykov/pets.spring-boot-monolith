@@ -3,16 +3,20 @@ package com.alekseybykov.examples.springboot;
 import com.alekseybykov.examples.springboot.entities.Person;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SimpleRestClient {
 
     public static void main(String args[]) {
         SimpleRestClient client = new SimpleRestClient();
         client.addPerson();
+        client.getPersonByIdByUsingRequestParam();
         client.updatePerson();
-        client.getPersonById();
+        client.getPersonByIdByUsingPathParam();
         client.deletePerson();
     }
 
@@ -50,15 +54,47 @@ public class SimpleRestClient {
         restTemplate.put(url, requestEntity);
     }
 
-    private void getPersonById() {
+    private void getPersonByIdByUsingRequestParam() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        String url = "http://localhost:8080/person/get";
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("id", 1L);
+
         RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<Person> responseEntity = restTemplate.exchange(
+                builder.toUriString(),
+                HttpMethod.GET,
+                requestEntity,
+                Person.class
+        );
+
+        Person person = responseEntity.getBody();
+        System.out.println(person);
+    }
+
+    private void getPersonByIdByUsingPathParam() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
         String url = "http://localhost:8080/person/get/{id}";
 
-        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-        ResponseEntity<Person> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Person.class, 1L);
+        Map<String, Long> uriParams = new HashMap<>();
+        uriParams.put("id", 1L);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<Person> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                requestEntity,
+                Person.class,
+                uriParams
+        );
 
         Person person = responseEntity.getBody();
         System.out.println(person);
