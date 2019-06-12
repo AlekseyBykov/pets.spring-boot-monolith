@@ -6,10 +6,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleRestClient {
+
+    private static final String uri = "http://localhost:8080/person";
 
     public static void main(String args[]) {
         SimpleRestClient client = new SimpleRestClient();
@@ -25,7 +26,7 @@ public class SimpleRestClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/person/add";
+        String url = String.format("%s%s", uri, "/add");
 
         Person person = new Person();
         person.setId(1L);
@@ -43,7 +44,7 @@ public class SimpleRestClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/person/update";
+        String url = String.format("%s%s", uri, "/update");
 
         Person person = new Person();
         person.setId(1L);
@@ -58,7 +59,7 @@ public class SimpleRestClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String url = "http://localhost:8080/person/get";
+        String url = String.format("%s%s", uri, "/get");
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("id", 1L);
 
@@ -80,7 +81,7 @@ public class SimpleRestClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String url = "http://localhost:8080/person/get/{id}";
+        String url = String.format("%s%s", uri, "/get/{id}");
 
         Map<String, Long> uriParams = new HashMap<>();
         uriParams.put("id", 1L);
@@ -105,7 +106,7 @@ public class SimpleRestClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/person/delete/{id}";
+        String url = String.format("%s%s", uri, "/delete/{id}");
 
         HttpEntity<Person> requestEntity = new HttpEntity<>(headers);
         restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Void.class, 1L);
