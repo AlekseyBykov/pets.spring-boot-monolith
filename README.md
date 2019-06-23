@@ -1,4 +1,7 @@
 # spring-boot-example
-An example of Spring Boot application: REST endpoints with simple client for consuming.
+An example of Spring Boot application: REST endpoints with tests coverage.
 
-Includes SpringFox Swagger for generating the RESTful contract for consumers.
+Includes: 
+
+* Secured endpoints by using Basic Authentication
+* SpringFox Swagger for generating the RESTful contract for consumers
