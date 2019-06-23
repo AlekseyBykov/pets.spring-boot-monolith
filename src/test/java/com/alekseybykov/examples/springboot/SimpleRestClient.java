@@ -1,6 +1,6 @@
 package com.alekseybykov.examples.springboot;
 
-import com.alekseybykov.examples.springboot.entities.Person;
+import com.alekseybykov.examples.springboot.component.entities.Person;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,7 +18,7 @@ public class SimpleRestClient {
         client.getPersonByIdByUsingRequestParam();
         client.updatePerson();
         client.getPersonByIdByUsingPathParam();
-        client.deletePerson();
+//        client.deletePerson();
     }
 
     private void addPerson() {

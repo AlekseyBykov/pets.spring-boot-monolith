@@ -1,7 +1,7 @@
-package com.alekseybykov.examples.springboot.service;
+package com.alekseybykov.examples.springboot.component.service;
 
-import com.alekseybykov.examples.springboot.entities.Person;
-import com.alekseybykov.examples.springboot.repository.PersonRepository;
+import com.alekseybykov.examples.springboot.component.entities.Person;
+import com.alekseybykov.examples.springboot.component.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

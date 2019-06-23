@@ -1,7 +1,7 @@
-package com.alekseybykov.examples.springboot.controller;
+package com.alekseybykov.examples.springboot.component.controller;
 
-import com.alekseybykov.examples.springboot.entities.Person;
-import com.alekseybykov.examples.springboot.service.PersonService;
+import com.alekseybykov.examples.springboot.component.entities.Person;
+import com.alekseybykov.examples.springboot.component.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;

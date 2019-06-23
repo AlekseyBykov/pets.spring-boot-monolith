@@ -1,6 +1,6 @@
-package com.alekseybykov.examples.springboot.controller;
+package com.alekseybykov.examples.springboot.component.controller;
 
-import com.alekseybykov.examples.springboot.service.PersonService;
+import com.alekseybykov.examples.springboot.component.service.PersonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

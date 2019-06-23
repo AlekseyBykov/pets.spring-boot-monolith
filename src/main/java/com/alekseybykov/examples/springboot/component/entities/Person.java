@@ -1,4 +1,4 @@
-package com.alekseybykov.examples.springboot.entities;
+package com.alekseybykov.examples.springboot.component.entities;
 
 import lombok.Data;
 

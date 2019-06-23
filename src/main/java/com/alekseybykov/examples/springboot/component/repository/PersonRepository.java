@@ -1,6 +1,6 @@
-package com.alekseybykov.examples.springboot.repository;
+package com.alekseybykov.examples.springboot.component.repository;
 
-import com.alekseybykov.examples.springboot.entities.Person;
+import com.alekseybykov.examples.springboot.component.entities.Person;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
