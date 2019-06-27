@@ -2,11 +2,13 @@ package com.alekseybykov.examples.springboot.component.service;
 
 import com.alekseybykov.examples.springboot.component.entities.Person;
 import com.alekseybykov.examples.springboot.component.repository.PersonRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Slf4j
 @Service
 public class PersonServiceImpl implements PersonService {
 
