@@ -22,7 +22,7 @@
         <sqlserver.version>6.1.0.jre8</sqlserver.version>
         <httpclient.version>4.5.7</httpclient.version>
         <lombok.version>1.18.0</lombok.version>
-        <swagger.version>2.4.0</swagger.version>
+        <swagger.version>2.7.0</swagger.version>
     </properties>
 
     <name>spring-boot-example</name>
