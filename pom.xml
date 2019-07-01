@@ -23,6 +23,7 @@
         <httpclient.version>4.5.7</httpclient.version>
         <lombok.version>1.18.0</lombok.version>
         <swagger.version>2.7.0</swagger.version>
+        <hal.version>3.0.8.RELEASE</hal.version>
     </properties>
 
     <name>spring-boot-example</name>
@@ -51,6 +52,14 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -82,6 +91,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-hal-browser</artifactId>
+            <version>${hal.version}</version>
         </dependency>
     </dependencies>
 

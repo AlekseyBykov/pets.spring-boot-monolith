@@ -4,4 +4,6 @@ An example of Spring Boot application: REST endpoints with tests coverage.
 Includes: 
 
 * Secured endpoints by using Basic Authentication
-* SpringFox Swagger for generating the RESTful contract for consumers
+* Springfox Swagger for generating the RESTful contract for consumers
+* Actuator for system monitoring
+* HAL Browser for visualization Actuator's data

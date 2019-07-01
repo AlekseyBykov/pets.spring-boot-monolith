@@ -25,7 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v2/api-docs",
             "/swagger-resources/**",
             "/swagger-ui.html**",
-            "/webjars/**"
+            "/webjars/**",
+            "/application/actuator/**",
+            "/application/browser/**"
         );
     }
 
@@ -40,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/configuration/security",
                         "/swagger-ui.html**",
-                        "/webjars/**").anonymous()
+                        "/webjars/**",
+                        "/application/actuator/**",
+                        "/application/browser/**").anonymous()
 
                 .antMatchers(HttpMethod.GET, "/person/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/person/add").hasRole("USER")
