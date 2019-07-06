@@ -9,6 +9,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
+/**
+ * @author  aleksey.n.bykov@gmail.com
+ * @version 1.0
+ * @since   2019-06-11
+ */
 public class RestClient {
 
     public static void main(String args[]) {

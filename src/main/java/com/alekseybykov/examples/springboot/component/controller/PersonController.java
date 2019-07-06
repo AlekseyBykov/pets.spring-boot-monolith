@@ -9,6 +9,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+/**
+ * @author  aleksey.n.bykov@gmail.com
+ * @version 1.0
+ * @since   2019-06-11
+ */
 @RestController
 @RequestMapping("person")
 public class PersonController {

@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * @author  aleksey.n.bykov@gmail.com
+ * @version 1.0
+ * @since   2019-06-11
+ */
 @Slf4j
 @Service
 public class PersonServiceImpl implements PersonService {
