@@ -2,11 +2,8 @@ package com.alekseybykov.examples.springboot.component.consumer;
 
 import com.alekseybykov.examples.springboot.component.consumer.dto.PersonDTO;
 import com.alekseybykov.examples.springboot.component.consumer.util.AuthUtil;
-import com.alekseybykov.examples.springboot.component.entities.Person;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.URI;
 
 /**
  * @author  aleksey.n.bykov@gmail.com
@@ -20,12 +17,13 @@ public class RestClient {
 
     public static void main(String args[]) {
         RestClient restClient = new RestClient();
-        restClient.addPerson();
+        restClient.createPerson();
+        restClient.readPerson();
 //        restClient.updatePerson();
 //        restClient.deletePerson();
     }
 
-    private void addPerson() {
+    private void createPerson() {
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format("%s/%s", contextPath, "person/add");
 
@@ -36,10 +34,22 @@ public class RestClient {
                 .build();
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(
-                url, HttpMethod.POST,
-                AuthUtil.createEntityWithBasicAuth(personDTO, MediaType.ALL, username, password), String.class);
+                url, HttpMethod.POST, AuthUtil.createEntityWithBasicAuth(
+                        personDTO, MediaType.ALL, username, password), String.class);
 
         // Should print 'Response 201 CREATED'
+        System.out.println(responseEntity.toString());
+    }
+
+    private void readPerson() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = String.format("%s/%s", contextPath, "person/get/1");
+
+        ResponseEntity<PersonDTO> responseEntity = restTemplate.exchange(
+                url, HttpMethod.GET, AuthUtil.createEntityWithBasicAuth(
+                        null, MediaType.ALL, username, password), PersonDTO.class);
+
+        // Should print 'Response 200 OK' and person details
         System.out.println(responseEntity.toString());
     }
 
