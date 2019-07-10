@@ -67,9 +67,9 @@ public class RestClient {
         dto.setFirstName("C");
         dto.setLastName("D");
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
+        ResponseEntity<PersonDTO> responseEntity = restTemplate.exchange(
                 url, HttpMethod.PUT, AuthUtil.createEntityWithBasicAuth(
-                        dto, MediaType.ALL, username, password), String.class);
+                        dto, MediaType.ALL, username, password), PersonDTO.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
         // Should print 'Response 200 OK' and updated person details

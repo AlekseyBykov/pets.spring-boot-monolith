@@ -1,4 +1,4 @@
-package com.alekseybykov.examples.springboot.component.controller;
+package com.alekseybykov.examples.springboot.component.rest.controller;
 
 import com.alekseybykov.examples.springboot.component.entities.Person;
 import com.alekseybykov.examples.springboot.component.repository.PersonRepository;

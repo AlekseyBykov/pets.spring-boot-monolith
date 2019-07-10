@@ -1,10 +1,14 @@
 package com.alekseybykov.examples.springboot.component.service;
 
 import com.alekseybykov.examples.springboot.component.entities.Person;
+import com.alekseybykov.examples.springboot.component.provider.PersonProvider;
 import com.alekseybykov.examples.springboot.component.repository.PersonRepository;
+import com.alekseybykov.examples.springboot.component.rest.api.dto.PersonDTO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -15,15 +19,16 @@ import java.util.*;
  */
 @Slf4j
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonProvider personProvider;
+    private final PersonRepository personRepository;
 
     public List<Person> getAllPersons() {
         List<Person> list = new ArrayList<>();
         personRepository.findAll().forEach(list::add);
-
         return list;
     }
 
@@ -31,18 +36,14 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findById(personId).orElse(null);
     }
 
-    public boolean addPerson(Person person) {
-        List<Person> list = personRepository.findByFirstNameAndLastName(person.getFirstName(), person.getLastName());
-        if(list.size() > 0) {
-            return false;
-        } else {
-            personRepository.save(person);
-            return true;
-        }
+    public Person addPerson(PersonDTO personDTO) {
+        Person person = personProvider.buildPerson(personDTO);
+        return personRepository.save(person);
     }
 
-    public void updatePerson(Person person) {
-        personRepository.save(person);
+    public Person updatePerson(PersonDTO personDTO) {
+        Person person = personProvider.buildPerson(personDTO);
+        return personRepository.save(person);
     }
 
     public void deletePerson(Long personId) {

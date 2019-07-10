@@ -1,6 +1,7 @@
 package com.alekseybykov.examples.springboot.component.service;
 
 import com.alekseybykov.examples.springboot.component.entities.Person;
+import com.alekseybykov.examples.springboot.component.rest.api.dto.PersonDTO;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public interface PersonService {
 
     Person getPersonById(Long personId);
 
-    boolean addPerson(Person person);
+    Person addPerson(PersonDTO personDTO);
 
-    void updatePerson(Person person);
+    Person updatePerson(PersonDTO personDTO);
 
     void deletePerson(Long personId);
 }
