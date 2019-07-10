@@ -6,7 +6,8 @@ import com.alekseybykov.examples.springboot.component.repository.PersonRepositor
 import com.alekseybykov.examples.springboot.component.rest.api.dto.PersonDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,27 +27,27 @@ public class PersonServiceImpl implements PersonService {
     private final PersonProvider personProvider;
     private final PersonRepository personRepository;
 
-    public List<Person> getAllPersons() {
-        List<Person> list = new ArrayList<>();
-        personRepository.findAll().forEach(list::add);
-        return list;
+    public Page<PersonDTO> getAllPersons(Pageable pageable) {
+        return personRepository.findAll(pageable).map(PersonDTO::new);
     }
 
-    public Person getPersonById(Long personId) {
-        return personRepository.findById(personId).orElse(null);
+    public PersonDTO getPersonById(Long personId) {
+        Optional<Person> person = personRepository.findById(personId);
+        return person.map(PersonDTO::new).orElse(null);
     }
 
-    public Person addPerson(PersonDTO personDTO) {
+    public PersonDTO addPerson(PersonDTO personDTO) {
         Person person = personProvider.buildPerson(personDTO);
-        return personRepository.save(person);
+        return new PersonDTO(personRepository.save(person));
     }
 
-    public Person updatePerson(PersonDTO personDTO) {
+    public PersonDTO updatePerson(PersonDTO personDTO) {
         Person person = personProvider.buildPerson(personDTO);
-        return personRepository.save(person);
+        return new PersonDTO(personRepository.save(person));
     }
 
     public void deletePerson(Long personId) {
-        personRepository.delete(getPersonById(personId));
+        Person person = personProvider.buildPerson(getPersonById(personId));
+        personRepository.delete(person);
     }
 }

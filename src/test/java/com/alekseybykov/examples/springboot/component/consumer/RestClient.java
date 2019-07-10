@@ -40,39 +40,42 @@ public class RestClient {
                         dto, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 201 CREATED'
+        // Should print 'Response 200 OK'
+        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
         System.out.println(responseEntity.toString());
     }
 
-    private PersonDTO readPerson() {
+    private void readPerson() {
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format("%s/%s", contextPath, "person/get/1");
 
-        ResponseEntity<PersonDTO> responseEntity = restTemplate.exchange(
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
                 url, HttpMethod.GET, AuthUtil.createEntityWithBasicAuth(
-                        null, MediaType.ALL, username, password), PersonDTO.class);
+                        null, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 200 OK' and person details
+        // Should print 'Response 200 OK'
+        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
         System.out.println(responseEntity.toString());
-
-        return responseEntity.getBody();
     }
 
     private void updatePerson() {
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format("%s/%s", contextPath, "person/update");
 
-        PersonDTO dto = readPerson();
-        dto.setFirstName("C");
-        dto.setLastName("D");
+        PersonDTO dto = PersonDTO.builder()
+                .id(1L)
+                .firstName("C")
+                .lastName("D")
+                .build();
 
-        ResponseEntity<PersonDTO> responseEntity = restTemplate.exchange(
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
                 url, HttpMethod.PUT, AuthUtil.createEntityWithBasicAuth(
-                        dto, MediaType.ALL, username, password), PersonDTO.class);
+                        dto, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 200 OK' and updated person details
+        // Should print 'Response 200 OK'
+        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":{"id":1,"firstName":"C","lastName":"D"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -85,7 +88,8 @@ public class RestClient {
                         null, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 204 NO_CONTENT'
+        // Should print 'Response 200 OK'
+        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":[]}
         System.out.println(responseEntity.toString());
     }
 }

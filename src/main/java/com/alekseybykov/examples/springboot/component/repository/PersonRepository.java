@@ -1,7 +1,7 @@
 package com.alekseybykov.examples.springboot.component.repository;
 
 import com.alekseybykov.examples.springboot.component.entities.Person;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
@@ -10,8 +10,4 @@ import java.util.List;
  * @version 1.0
  * @since   2019-06-11
  */
-public interface PersonRepository extends CrudRepository<Person, Long> {
-    List<Person> findByFirstName(String firstName);
-    List<Person> findByLastName(String LastName);
-    List<Person> findByFirstNameAndLastName(String firstName, String LastName);
-}
+public interface PersonRepository extends PagingAndSortingRepository<Person, Long> { }

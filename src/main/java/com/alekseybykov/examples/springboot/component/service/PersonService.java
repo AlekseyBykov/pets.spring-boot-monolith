@@ -1,9 +1,8 @@
 package com.alekseybykov.examples.springboot.component.service;
 
-import com.alekseybykov.examples.springboot.component.entities.Person;
 import com.alekseybykov.examples.springboot.component.rest.api.dto.PersonDTO;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author  aleksey.n.bykov@gmail.com
@@ -12,13 +11,13 @@ import java.util.List;
  */
 public interface PersonService {
 
-    List<Person> getAllPersons();
+    Page<PersonDTO> getAllPersons(Pageable pageable);
 
-    Person getPersonById(Long personId);
+    PersonDTO getPersonById(Long personId);
 
-    Person addPerson(PersonDTO personDTO);
+    PersonDTO addPerson(PersonDTO personDTO);
 
-    Person updatePerson(PersonDTO personDTO);
+    PersonDTO updatePerson(PersonDTO personDTO);
 
     void deletePerson(Long personId);
 }
