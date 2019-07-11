@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @Getter
 public enum ErrorCode {
-    EMPTY_ERROR(0);
+    NO_ERROR(0);
 
     private final int code;
 

@@ -10,9 +10,7 @@ import java.util.Collections;
  * @since   2019-07-10
  */
 public class ComponentAPI {
-    private ComponentAPI() {
-        throw new RuntimeException();
-    }
+    private ComponentAPI() { }
 
     public static PositiveResponse positiveResponse(Object data) {
         return new PositiveResponse(data);

@@ -41,7 +41,7 @@ public class RestClient {
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
         // Should print 'Response 200 OK'
-        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
+        // and JSON {"errorCode":"NO_ERROR","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -55,7 +55,7 @@ public class RestClient {
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
         // Should print 'Response 200 OK'
-        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
+        // and JSON {"errorCode":"NO_ERROR","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -75,7 +75,7 @@ public class RestClient {
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
         // Should print 'Response 200 OK'
-        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":{"id":1,"firstName":"C","lastName":"D"}}
+        // and JSON {"errorCode":"NO_ERROR","errorMessage":"","result":{"id":1,"firstName":"C","lastName":"D"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -89,7 +89,7 @@ public class RestClient {
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
         // Should print 'Response 200 OK'
-        // and JSON {"errorCode":"EMPTY_ERROR","errorMessage":"","result":[]}
+        // and JSON {"errorCode":"NO_ERROR","errorMessage":"","result":[]}
         System.out.println(responseEntity.toString());
     }
 }
