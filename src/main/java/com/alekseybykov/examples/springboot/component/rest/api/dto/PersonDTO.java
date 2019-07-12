@@ -20,13 +20,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class PersonDTO {
 
-    @NotNull
+    @NotNull(message = "Person's id cannot be null")
     private Long id;
 
-    @NotNull
+    @NotNull(message = "Person's first name cannot be empty")
     private String firstName;
 
-    @NotNull
+    @NotNull(message = "Person's last name cannot be empty")
     private String lastName;
 
     public PersonDTO(Person person) {
