@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class PositiveResponse extends Response {
-    public PositiveResponse(Object data) {
-        super(data);
+    public PositiveResponse(Object result) {
+        super(result);
     }
 }

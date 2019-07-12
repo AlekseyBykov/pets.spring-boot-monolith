@@ -19,12 +19,12 @@ import static com.alekseybykov.examples.springboot.component.rest.api.status.Sta
 public abstract class Response implements Serializable {
 
     private final StatusCode statusCode;
-    private final String errorMessage;
+    private final String message;
     private final Object result;
 
     public Response(Object result) {
         this.statusCode = OK;
-        this.errorMessage = StringUtils.EMPTY;
+        this.message = StringUtils.EMPTY;
         this.result = result;
     }
 }

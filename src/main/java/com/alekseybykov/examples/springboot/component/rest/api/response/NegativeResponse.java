@@ -10,7 +10,7 @@ import com.alekseybykov.examples.springboot.component.rest.api.status.StatusCode
  * @since   2019-07-12
  */
 public class NegativeResponse extends Response {
-    public NegativeResponse(StatusCode code, String message, Object result) {
-        super(code, message, result);
+    public NegativeResponse(StatusCode statusCode, String message, Object result) {
+        super(statusCode, message, result);
     }
 }

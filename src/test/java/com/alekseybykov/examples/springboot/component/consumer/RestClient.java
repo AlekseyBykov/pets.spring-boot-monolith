@@ -42,8 +42,7 @@ public class RestClient {
                         dto, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 200 OK'
-        // and JSON {"statusCode":"OK","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
+        // Should print {"statusCode":"OK","message":"","result":{"id":1,"firstName":"A","lastName":"B"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -56,8 +55,7 @@ public class RestClient {
                         null, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 200 OK'
-        // and JSON {"statusCode":"OK","errorMessage":"","result":{"id":1,"firstName":"A","lastName":"B"}}
+        // Should print {"statusCode":"OK","message":"","result":{"id":1,"firstName":"A","lastName":"B"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -76,8 +74,7 @@ public class RestClient {
                         dto, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 200 OK'
-        // and JSON {"statusCode":"OK","errorMessage":"","result":{"id":1,"firstName":"C","lastName":"D"}}
+        // Should print {"statusCode":"OK","message":"","result":{"id":1,"firstName":"C","lastName":"D"}}
         System.out.println(responseEntity.toString());
     }
 
@@ -90,8 +87,7 @@ public class RestClient {
                         null, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print 'Response 200 OK'
-        // and JSON {"statusCode":"OK","errorMessage":"","result":[]}
+        // Should print {"statusCode":"OK","message":"","result":[]}
         System.out.println(responseEntity.toString());
     }
 }

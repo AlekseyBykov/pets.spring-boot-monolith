@@ -22,7 +22,7 @@ public class ComponentAPI {
         return new PositiveResponse(Collections.emptyList());
     }
 
-    public static NegativeResponse negativeResponse(StatusCode errorCode, String errorMessage, Object details) {
-        return new NegativeResponse(errorCode, errorMessage, details);
+    public static NegativeResponse negativeResponse(StatusCode statusCode, String message, Object result) {
+        return new NegativeResponse(statusCode, message, result);
     }
 }
