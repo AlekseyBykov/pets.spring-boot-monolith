@@ -1,5 +1,5 @@
 # spring-boot-example
-An example of Spring Boot application: secured RESTful endpoints and separate CRUD client.
+An example of Spring Boot application: secured RESTful endpoints and separate CRUD client. Component provides some business functions as services over the web. These services can be accessed through the URL.
 
 Includes: 
 
