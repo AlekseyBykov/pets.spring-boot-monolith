@@ -19,8 +19,14 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonDTO {
+
+    @NotNull
     private Long id;
+
+    @NotNull
     private String firstName;
+
+    @NotNull
     private String lastName;
 
     public PersonDTO(Person person) {

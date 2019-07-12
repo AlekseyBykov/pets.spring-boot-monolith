@@ -8,12 +8,13 @@ import lombok.Getter;
  * @since   2019-07-10
  */
 @Getter
-public enum ErrorCode {
-    NO_ERROR(0);
+public enum StatusCode {
+    OK(0),
+    VALIDATION_ERROR(1);
 
     private final int code;
 
-    ErrorCode(int code) {
+    StatusCode(int code) {
         this.code = code;
     }
 }

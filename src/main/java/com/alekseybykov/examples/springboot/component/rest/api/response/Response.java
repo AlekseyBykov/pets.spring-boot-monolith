@@ -1,13 +1,13 @@
 package com.alekseybykov.examples.springboot.component.rest.api.response;
 
-import com.alekseybykov.examples.springboot.component.rest.api.status.ErrorCode;
+import com.alekseybykov.examples.springboot.component.rest.api.status.StatusCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
-import static com.alekseybykov.examples.springboot.component.rest.api.status.ErrorCode.NO_ERROR;
+import static com.alekseybykov.examples.springboot.component.rest.api.status.StatusCode.OK;
 
 /**
  * @author  aleksey.n.bykov@gmail.com
@@ -18,12 +18,12 @@ import static com.alekseybykov.examples.springboot.component.rest.api.status.Err
 @RequiredArgsConstructor
 public abstract class Response implements Serializable {
 
-    private final ErrorCode errorCode;
+    private final StatusCode statusCode;
     private final String errorMessage;
     private final Object result;
 
-    Response(Object result) {
-        this.errorCode = NO_ERROR;
+    public Response(Object result) {
+        this.statusCode = OK;
         this.errorMessage = StringUtils.EMPTY;
         this.result = result;
     }
