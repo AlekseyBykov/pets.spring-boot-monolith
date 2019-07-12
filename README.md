@@ -7,7 +7,9 @@ Includes:
 * Springfox Swagger for generating the RESTful contract for consumers
 * Actuator for system monitoring
 * HAL Browser for visualization Actuator's data
-* Separate client for consuming secured endpoints 
+* Separate client for consuming secured endpoints
+* Configured Logback for store log messages and archiving old log files
+* Glogal exceptions handler
 
 For testing in Fiddler (or any other web debugging tool):
 
