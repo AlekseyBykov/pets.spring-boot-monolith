@@ -6,6 +6,8 @@ import com.google.common.base.Preconditions;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import static java.lang.String.format;
+
 /**
  * @author  aleksey.n.bykov@gmail.com
  * @version 1.0
@@ -27,7 +29,7 @@ public class RestClient {
 
     private void createPerson() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = String.format("%s/%s", contextPath, "person/add");
+        String url = format("%s/%s", contextPath, "person/add");
 
         PersonDTO dto = PersonDTO.builder()
                 .id(1L)
@@ -47,7 +49,7 @@ public class RestClient {
 
     private void readPerson() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = String.format("%s/%s", contextPath, "person/get/1");
+        String url = format("%s/%s", contextPath, "person/get/1");
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(
                 url, HttpMethod.GET, AuthUtil.createEntityWithBasicAuth(
@@ -61,7 +63,7 @@ public class RestClient {
 
     private void updatePerson() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = String.format("%s/%s", contextPath, "person/update");
+        String url = format("%s/%s", contextPath, "person/update");
 
         PersonDTO dto = PersonDTO.builder()
                 .id(1L)
@@ -81,7 +83,7 @@ public class RestClient {
 
     private void deletePerson() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = String.format("%s/%s", contextPath, "person/delete/1");
+        String url = format("%s/%s", contextPath, "person/delete/1");
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(
                 url, HttpMethod.DELETE, AuthUtil.createEntityWithBasicAuth(
