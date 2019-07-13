@@ -13,7 +13,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.*;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
@@ -38,15 +41,51 @@ public class PersonRepositoryTest {
 
     @Test
     @SneakyThrows
-    public void testCreatePerson() {
-        // create table person
-        Person person = personRepository.save(new Person(1L, "A", "B"));
-        assertThat(person.getId()).isEqualTo(1L);
-        assertThat(person.getFirstName()).isEqualTo("A");
-        assertThat(person.getLastName()).isEqualTo("B");
+    public void testCRUD() {
+        /*
+          create table person
+         */
 
-        assertThat(jacksonTester.write(new PersonDTO(person)).getJson())
-                .isEqualTo(jacksonTester.write(PersonDTO.builder().id(1L).firstName("A").lastName("B").build()).getJson());
-        // drop table person
+        // create person
+        Person createdPerson = personRepository.save(new Person(1L, "A", "B"));
+        assertThat(createdPerson.getId()).isEqualTo(1L);
+        assertThat(createdPerson.getFirstName()).isEqualTo("A");
+        assertThat(createdPerson.getLastName()).isEqualTo("B");
+
+        PersonDTO createdPersonDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
+
+        assertThat(jacksonTester.write(new PersonDTO(createdPerson)).getJson())
+                .isEqualTo(jacksonTester.write(createdPersonDTO).getJson());
+
+        // read person
+        Person foundedPerson = personRepository.findById(1L).get();
+        assertThat(foundedPerson.getId()).isEqualTo(1L);
+        assertThat(foundedPerson.getFirstName()).isEqualTo("A");
+        assertThat(foundedPerson.getLastName()).isEqualTo("B");
+
+        PersonDTO foundedPersonDTO = new PersonDTO(foundedPerson);
+        assertThat(jacksonTester.write(createdPersonDTO).getJson())
+                .isEqualTo(jacksonTester.write(foundedPersonDTO).getJson());
+
+        // update person
+        PersonDTO updatedPersonDTO = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        Person updatedPerson = personRepository.save(new Person(updatedPersonDTO));
+        assertThat(updatedPerson.getId()).isEqualTo(1L);
+        assertThat(updatedPerson.getFirstName()).isEqualTo("C");
+        assertThat(updatedPerson.getLastName()).isEqualTo("D");
+
+        assertThat(jacksonTester.write(updatedPersonDTO).getJson())
+                .isEqualTo(jacksonTester.write(new PersonDTO(updatedPerson)).getJson());
+
+        // delete person
+        PersonDTO deletedPersonDTO = PersonDTO.builder().id(1L).build();
+        personRepository.delete(new Person(deletedPersonDTO));
+        Optional<Person> deletedPerson = personRepository.findById(1L);
+
+        assertFalse(deletedPerson.isPresent());
+
+        /*
+          drop table person
+         */
     }
 }
