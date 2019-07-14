@@ -47,6 +47,7 @@ public class PersonServiceUnitTest {
     @Autowired
     private PersonService personService;
 
+    // initialized through the initFields(...) method
     private JacksonTester<PersonDTO> jacksonTester;
 
     @MockBean

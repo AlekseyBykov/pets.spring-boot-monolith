@@ -41,6 +41,7 @@ public class PersonRepositoryUnitTest {
 //    @Autowired
 //    private TestEntityManager em;
 
+    // initialized through the initFields(...) method
     private JacksonTester<PersonDTO> jacksonTester;
 
     @Before
