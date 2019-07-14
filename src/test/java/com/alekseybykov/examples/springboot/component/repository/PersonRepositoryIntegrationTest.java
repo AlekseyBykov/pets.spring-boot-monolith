@@ -20,6 +20,14 @@ import static org.junit.Assert.assertFalse;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
+ * Integration test for repository.
+ *
+ * The Spring context will be bootstrapped before
+ * executing integration tests.
+ *
+ * replace = NONE is needed for using the same
+ * MS SQL database.
+ *
  * @author  aleksey.n.bykov@gmail.com
  * @version 1.0
  * @since   2019-07-13
@@ -27,7 +35,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = NONE)
-public class PersonRepositoryTest {
+public class PersonRepositoryIntegrationTest {
 
     @Autowired
     private PersonRepository personRepository;

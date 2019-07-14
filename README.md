@@ -1,6 +1,8 @@
 # spring-boot-example
 An example of Spring Boot application: secured RESTful endpoints and separate CRUD client. Component provides some business functions as services over the web. These services can be accessed through the URL.
 
+Represents the Application tier in three-tier design (known as *backend*). Typical layered architecture: API calls is processed from the Controller layer to the Persistence layer through the Service layer.
+
 Includes: 
 
 * Secured endpoints by using Basic Authentication
@@ -10,6 +12,7 @@ Includes:
 * Separate client for consuming secured endpoints
 * Configured Logback for store log messages and archiving old log files
 * Glogal exceptions handler
+* Integration and unit tests
 
 For testing in Fiddler (or any other web debugging tool):
 
