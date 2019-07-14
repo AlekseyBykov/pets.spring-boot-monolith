@@ -1,11 +1,11 @@
 package com.alekseybykov.examples.springboot.component.service;
 
 import com.alekseybykov.examples.springboot.component.entities.Person;
-import com.alekseybykov.examples.springboot.component.provider.PersonProvider;
 import com.alekseybykov.examples.springboot.component.repository.PersonRepository;
 import com.alekseybykov.examples.springboot.component.rest.api.dto.PersonDTO;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,11 @@ import java.util.*;
 @Slf4j
 @Service
 @Transactional
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    private final PersonProvider personProvider;
-    private final PersonRepository personRepository;
+    @Autowired
+    private PersonRepository personRepository;
 
     public Page<PersonDTO> getAllPersons(Pageable pageable) {
         return personRepository.findAll(pageable).map(PersonDTO::new);
@@ -37,17 +37,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public PersonDTO addPerson(PersonDTO personDTO) {
-        Person person = personProvider.buildPerson(personDTO);
+        Person person = new Person(personDTO);
         return new PersonDTO(personRepository.save(person));
     }
 
     public PersonDTO updatePerson(PersonDTO personDTO) {
-        Person person = personProvider.buildPerson(personDTO);
+        Person person = new Person(personDTO);
         return new PersonDTO(personRepository.save(person));
     }
 
     public void deletePerson(Long personId) {
-        Person person = personProvider.buildPerson(getPersonById(personId));
+        Person person = new Person(getPersonById(personId));
         personRepository.delete(person);
     }
 }

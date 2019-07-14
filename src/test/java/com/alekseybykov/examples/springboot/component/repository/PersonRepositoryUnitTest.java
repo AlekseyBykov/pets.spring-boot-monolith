@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,10 +21,7 @@ import static org.junit.Assert.assertFalse;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
- * Integration test for repository.
- *
- * The Spring context will be bootstrapped before
- * executing integration tests.
+ * Unit test for repository: testing the layer in isolation from other layers.
  *
  * replace = NONE is needed for using the same
  * MS SQL database.
@@ -35,10 +33,13 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = NONE)
-public class PersonRepositoryIntegrationTest {
+public class PersonRepositoryUnitTest {
 
     @Autowired
     private PersonRepository personRepository;
+
+//    @Autowired
+//    private TestEntityManager em;
 
     private JacksonTester<PersonDTO> jacksonTester;
 
@@ -54,19 +55,26 @@ public class PersonRepositoryIntegrationTest {
           create table person
          */
 
-        // create person
-        Person createdPerson = personRepository.save(new Person(1L, "A", "B"));
+        // --- create person ---
+
+        // given
+        Person person = new Person(1L, "A", "B");
+        PersonDTO createdPersonDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
+
+        // when
+        Person createdPerson = personRepository.save(person);
+        // then
         assertThat(createdPerson.getId()).isEqualTo(1L);
         assertThat(createdPerson.getFirstName()).isEqualTo("A");
         assertThat(createdPerson.getLastName()).isEqualTo("B");
-
-        PersonDTO createdPersonDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
-
         assertThat(jacksonTester.write(new PersonDTO(createdPerson)).getJson())
                 .isEqualTo(jacksonTester.write(createdPersonDTO).getJson());
 
-        // read person
+        // --- read person ---
+
+        //when
         Person foundedPerson = personRepository.findById(1L).get();
+        // then
         assertThat(foundedPerson.getId()).isEqualTo(1L);
         assertThat(foundedPerson.getFirstName()).isEqualTo("A");
         assertThat(foundedPerson.getLastName()).isEqualTo("B");
@@ -75,21 +83,27 @@ public class PersonRepositoryIntegrationTest {
         assertThat(jacksonTester.write(createdPersonDTO).getJson())
                 .isEqualTo(jacksonTester.write(foundedPersonDTO).getJson());
 
-        // update person
+        // --- update person ---
+
+        // given
         PersonDTO updatedPersonDTO = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        // when
         Person updatedPerson = personRepository.save(new Person(updatedPersonDTO));
+        // then
         assertThat(updatedPerson.getId()).isEqualTo(1L);
         assertThat(updatedPerson.getFirstName()).isEqualTo("C");
         assertThat(updatedPerson.getLastName()).isEqualTo("D");
-
         assertThat(jacksonTester.write(updatedPersonDTO).getJson())
                 .isEqualTo(jacksonTester.write(new PersonDTO(updatedPerson)).getJson());
 
-        // delete person
-        PersonDTO deletedPersonDTO = PersonDTO.builder().id(1L).build();
-        personRepository.delete(new Person(deletedPersonDTO));
-        Optional<Person> deletedPerson = personRepository.findById(1L);
+        // --- delete person ---
 
+        // given
+        PersonDTO deletedPersonDTO = PersonDTO.builder().id(1L).build();
+        // when
+        personRepository.delete(new Person(deletedPersonDTO));
+        // then
+        Optional<Person> deletedPerson = personRepository.findById(1L);
         assertFalse(deletedPerson.isPresent());
 
         /*
