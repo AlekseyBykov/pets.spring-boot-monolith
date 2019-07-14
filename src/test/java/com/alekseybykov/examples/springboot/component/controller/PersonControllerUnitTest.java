@@ -1,6 +1,5 @@
 package com.alekseybykov.examples.springboot.component.controller;
 
-import com.alekseybykov.examples.springboot.component.entities.Person;
 import com.alekseybykov.examples.springboot.component.rest.api.dto.PersonDTO;
 import com.alekseybykov.examples.springboot.component.rest.controller.PersonController;
 import com.alekseybykov.examples.springboot.component.service.PersonService;
@@ -22,13 +21,16 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.doAnswer;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.is;
-
 
 /**
  * Unit test for controller: testing the Presentation layer
@@ -82,6 +84,8 @@ public class PersonControllerUnitTest {
     @Test
     @SneakyThrows
     public void testCRUD() {
+
+        // --- create person ---
         PersonDTO personDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
         mvc.perform(post("/person/add")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -92,5 +96,33 @@ public class PersonControllerUnitTest {
                 .andExpect(jsonPath("$.result.id", is(1)))
                 .andExpect(jsonPath("$.result.firstName", is("A")))
                 .andExpect(jsonPath("$.result.lastName", is("B")));
+
+        // --- read person ---
+        mvc.perform(get("/person/get/" + 1L)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result.id", is(1)))
+                .andExpect(jsonPath("$.result.firstName", is("A")))
+                .andExpect(jsonPath("$.result.lastName", is("B")));
+
+        // --- update person ---
+        PersonDTO updatedPersonDTO = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        mvc.perform(put("/person/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(jacksonTester.write(updatedPersonDTO).getJson()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result.id", is(1)))
+                .andExpect(jsonPath("$.result.firstName", is("C")))
+                .andExpect(jsonPath("$.result.lastName", is("D")));
+
+        // --- delete person ---
+        mvc.perform(delete("/person/delete/" + 1L)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result", hasSize(0)));
     }
 }
