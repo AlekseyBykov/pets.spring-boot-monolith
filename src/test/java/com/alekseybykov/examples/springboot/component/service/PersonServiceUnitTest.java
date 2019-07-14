@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doAnswer;
 
 /**
- * Unit test for service: testing the layer in isolation from other layers.
+ * Unit test for service: testing the Business layer in isolation from other layers.
  *
  * Used @MockBean for bypassing the actual
  * dependency from the Data layer.
@@ -56,6 +56,7 @@ public class PersonServiceUnitTest {
     public void setup() {
         JacksonTester.initFields(this, new ObjectMapper());
 
+        // --- behaviour for mocked dependency ---
         Optional<Person> foundedPerson = Optional.of(new Person(1L, "A", "B"));
         Mockito.when(personRepository.findById(1L))
                 .thenReturn(foundedPerson);
@@ -63,6 +64,10 @@ public class PersonServiceUnitTest {
         Person createdPerson = new Person(1L, "A", "B");
         Mockito.when(personRepository.save(createdPerson))
                 .thenReturn(createdPerson);
+
+        Person updatedPerson = new Person(1L, "C", "D");
+        Mockito.when(personRepository.save(updatedPerson))
+                .thenReturn(updatedPerson);
 
         Person deletedPerson = new Person(1L, null, null);
 
@@ -76,6 +81,7 @@ public class PersonServiceUnitTest {
     @Test
     @SneakyThrows
     public void testCRUD() {
+        // --- create person ---
         // given
         PersonDTO personDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
         // when
@@ -83,5 +89,28 @@ public class PersonServiceUnitTest {
         // then
         assertThat(jacksonTester.write(personDTO).getJson())
                 .isEqualTo(jacksonTester.write(createdPersonDTO).getJson());
+
+        // --- read person ---
+        // when
+        PersonDTO foundedPersonDTO = personService.getPersonById(1L);
+        // then
+        assertThat(jacksonTester.write(foundedPersonDTO).getJson())
+                .isEqualTo(jacksonTester.write(createdPersonDTO).getJson());
+
+        // --- update person ---
+        // given
+        PersonDTO personDtoForUpdate = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        // when
+        PersonDTO updatePersonDTO = personService.updatePerson(personDtoForUpdate);
+        // then
+        assertThat(jacksonTester.write(updatePersonDTO).getJson())
+                .isEqualTo(jacksonTester.write(personDtoForUpdate).getJson());
+
+        // --- delete ---
+        Person personDtoForDelete = new Person(1L, null, null);
+        // when
+        personService.deletePerson(personDtoForDelete.getId());
+        // then
+        // fixme add assertion
     }
 }

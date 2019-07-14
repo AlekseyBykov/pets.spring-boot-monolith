@@ -21,7 +21,7 @@ import static org.junit.Assert.assertFalse;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
- * Unit test for repository: testing the layer in isolation from other layers.
+ * Unit test for repository: testing the Data layer in isolation from other layers.
  *
  * replace = NONE is needed for using the same
  * MS SQL database.
