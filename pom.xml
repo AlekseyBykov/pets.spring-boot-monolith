@@ -28,7 +28,7 @@
     </properties>
 
     <name>spring-boot-example</name>
-    <description>An example of Spring Boot application: secured RESTful endpoints and separate CRUD client.</description>
+    <description>An example of Spring Boot monolith application: secured RESTful endpoints and separate CRUD client.</description>
     <url>https://alekseybykov.github.io</url>
 
     <dependencies>

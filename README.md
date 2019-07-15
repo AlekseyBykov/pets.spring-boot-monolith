@@ -1,7 +1,7 @@
 # spring-boot-example
-An example of Spring Boot application: secured RESTful endpoints and separate CRUD client. Component provides some business functions as services over the web. These services can be accessed through the URL.
+An example of Spring Boot monolith application: secured RESTful endpoints and separate CRUD client. Monolith component provides some business functions as services over the web. These services can be accessed through the URL.
 
-Represents the Application tier in three-tier design (known as *backend*). Typical layered architecture: API calls is processed from the Controller layer to the Persistence layer through the Service layer.
+Represents the Application tier(known as *backend*) in three-tier design. Typical layered architecture: API calls is processed from the Controller layer to the Persistence layer through the Service layer.
 
 Includes: 
 
