@@ -23,6 +23,8 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 /**
  * Unit test for repository: testing the Data layer in isolation from other layers.
  *
+ * Actually, there is no need to testing functionality, provided by Spring Data.
+ *
  * replace = NONE is needed for using the same
  * MS SQL database.
  *
