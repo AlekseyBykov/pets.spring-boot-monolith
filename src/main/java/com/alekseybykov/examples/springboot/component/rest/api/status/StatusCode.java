@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public enum StatusCode {
     OK(0),
-    VALIDATION_ERROR(1);
+    INTERNAL_SERVER_ERROR(1);
 
     private final int code;
 
