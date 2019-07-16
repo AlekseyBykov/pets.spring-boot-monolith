@@ -3,8 +3,6 @@ package com.alekseybykov.examples.springboot.component.rest.api.response;
 import com.alekseybykov.examples.springboot.component.rest.api.status.StatusCode;
 
 /**
- * Global exception handler.
- *
  * @author  aleksey.n.bykov@gmail.com
  * @version 1.0
  * @since   2019-07-12
