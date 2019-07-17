@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.alekseybykov.examples</groupId>
+    <groupId>alekseybykov.portfolio</groupId>
     <artifactId>spring-boot-example</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -28,7 +28,7 @@
     </properties>
 
     <name>spring-boot-example</name>
-    <description>An example of Spring Boot monolith application: secured RESTful endpoints and separate CRUD client.</description>
+    <description>An example of Spring Boot monolith application: secured RESTful endpoints and separate command-line CRUD client.</description>
     <url>https://alekseybykov.github.io</url>
 
     <dependencies>
