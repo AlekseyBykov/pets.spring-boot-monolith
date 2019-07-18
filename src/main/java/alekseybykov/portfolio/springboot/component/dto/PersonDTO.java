@@ -1,6 +1,6 @@
-package alekseybykov.portfolio.springboot.component.rest.api.dto;
+package alekseybykov.portfolio.springboot.component.dto;
 
-import alekseybykov.portfolio.springboot.component.entities.Person;
+import alekseybykov.portfolio.springboot.component.domain.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

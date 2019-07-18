@@ -1,4 +1,4 @@
-package alekseybykov.portfolio.springboot.component.rest.api.status;
+package alekseybykov.portfolio.springboot.component.response;
 
 import lombok.Getter;
 

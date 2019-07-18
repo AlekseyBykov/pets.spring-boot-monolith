@@ -1,4 +1,4 @@
-package alekseybykov.portfolio.springboot.component.rest.api.response;
+package alekseybykov.portfolio.springboot.component.response;
 
 import lombok.Getter;
 import lombok.ToString;

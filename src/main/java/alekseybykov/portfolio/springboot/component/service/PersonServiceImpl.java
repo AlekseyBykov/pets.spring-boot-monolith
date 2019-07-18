@@ -1,8 +1,8 @@
 package alekseybykov.portfolio.springboot.component.service;
 
-import alekseybykov.portfolio.springboot.component.entities.Person;
+import alekseybykov.portfolio.springboot.component.domain.Person;
 import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
-import alekseybykov.portfolio.springboot.component.rest.api.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

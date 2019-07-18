@@ -1,8 +1,8 @@
-package alekseybykov.portfolio.springboot.component.rest.api.advice;
+package alekseybykov.portfolio.springboot.component.advice;
 
-import alekseybykov.portfolio.springboot.component.rest.api.ComponentAPI;
-import alekseybykov.portfolio.springboot.component.rest.api.response.NegativeResponse;
-import alekseybykov.portfolio.springboot.component.rest.api.status.StatusCode;
+import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
+import alekseybykov.portfolio.springboot.component.response.NegativeResponse;
+import alekseybykov.portfolio.springboot.component.response.StatusCode;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
 
     private NegativeResponse handleDefault(Throwable throwable) {
         log.error("Error while processing the request", throwable);
-        return ComponentAPI.negativeResponse(StatusCode.INTERNAL_SERVER_ERROR,
+        return ResponseAPI.negativeResponse(StatusCode.INTERNAL_SERVER_ERROR,
                 defaultIfNull(throwable.getMessage(), "Error while processing the request"), throwable);
     }
 }

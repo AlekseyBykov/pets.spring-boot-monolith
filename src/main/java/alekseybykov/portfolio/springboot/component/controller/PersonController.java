@@ -1,8 +1,8 @@
-package alekseybykov.portfolio.springboot.component.rest.controller;
+package alekseybykov.portfolio.springboot.component.controller;
 
-import alekseybykov.portfolio.springboot.component.rest.api.ComponentAPI;
-import alekseybykov.portfolio.springboot.component.rest.api.dto.PersonDTO;
-import alekseybykov.portfolio.springboot.component.rest.api.response.Response;
+import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
+import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.response.Response;
 import alekseybykov.portfolio.springboot.component.service.PersonService;
 
 import com.google.common.base.Preconditions;
@@ -36,31 +36,31 @@ public class PersonController {
     @GetMapping("list")
     public Response getAllPersonsByPage(@PageableDefault(size = 10) @SortDefault(sort = "firstName",
             direction = Sort.Direction.DESC) Pageable pageable) {
-        return ComponentAPI.positiveResponse(personService.getAllPersons(pageable));
+        return ResponseAPI.positiveResponse(personService.getAllPersons(pageable));
     }
 
     @PostMapping("add")
     public Response addPerson(@RequestBody @Valid PersonDTO personDTO) {
         Preconditions.checkState(Objects.nonNull(personDTO), "Persons details must be specified");
-        return ComponentAPI.positiveResponse(personService.addPerson(personDTO));
+        return ResponseAPI.positiveResponse(personService.addPerson(personDTO));
     }
 
     @GetMapping("get/{id}")
     public Response getPersonByIdByUsingPathParam(@PathVariable("id") Long id) {
         Preconditions.checkState(Objects.nonNull(id), "Persons id must be specified");
-        return ComponentAPI.positiveResponse(personService.getPersonById(id));
+        return ResponseAPI.positiveResponse(personService.getPersonById(id));
     }
 
     @PutMapping("update")
     public Response updatePerson(@RequestBody @Valid PersonDTO personDTO) {
         Preconditions.checkState(Objects.nonNull(personDTO), "Persons details must be specified");
-        return ComponentAPI.positiveResponse(personService.updatePerson(personDTO));
+        return ResponseAPI.positiveResponse(personService.updatePerson(personDTO));
     }
 
     @DeleteMapping("delete/{id}")
     public Response deletePerson(@PathVariable("id") Long id) {
         Preconditions.checkState(Objects.nonNull(id), "Persons id must be specified");
         personService.deletePerson(id);
-        return ComponentAPI.emptyPositiveResponse();
+        return ResponseAPI.emptyPositiveResponse();
     }
 }

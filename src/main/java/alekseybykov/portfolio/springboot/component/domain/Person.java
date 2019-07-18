@@ -1,6 +1,6 @@
-package alekseybykov.portfolio.springboot.component.entities;
+package alekseybykov.portfolio.springboot.component.domain;
 
-import alekseybykov.portfolio.springboot.component.rest.api.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import com.google.common.base.Preconditions;
 import lombok.*;
 

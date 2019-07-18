@@ -1,6 +1,5 @@
-package alekseybykov.portfolio.springboot.component.rest.api.response;
+package alekseybykov.portfolio.springboot.component.response;
 
-import alekseybykov.portfolio.springboot.component.rest.api.status.StatusCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

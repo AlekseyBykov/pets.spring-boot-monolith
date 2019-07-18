@@ -1,8 +1,8 @@
-package alekseybykov.portfolio.springboot.component.rest.api;
+package alekseybykov.portfolio.springboot.component.response;
 
-import alekseybykov.portfolio.springboot.component.rest.api.response.NegativeResponse;
-import alekseybykov.portfolio.springboot.component.rest.api.response.PositiveResponse;
-import alekseybykov.portfolio.springboot.component.rest.api.status.StatusCode;
+import alekseybykov.portfolio.springboot.component.response.NegativeResponse;
+import alekseybykov.portfolio.springboot.component.response.PositiveResponse;
+import alekseybykov.portfolio.springboot.component.response.StatusCode;
 
 import java.util.Collections;
 
@@ -11,8 +11,8 @@ import java.util.Collections;
  * @version 1.0
  * @since   2019-07-10
  */
-public class ComponentAPI {
-    private ComponentAPI() { }
+public class ResponseAPI {
+    private ResponseAPI() { }
 
     public static PositiveResponse positiveResponse(Object data) {
         return new PositiveResponse(data);

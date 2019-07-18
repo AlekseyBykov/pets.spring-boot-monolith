@@ -1,6 +1,4 @@
-package alekseybykov.portfolio.springboot.component.rest.api.response;
-
-import alekseybykov.portfolio.springboot.component.rest.api.status.StatusCode;
+package alekseybykov.portfolio.springboot.component.response;
 
 /**
  * @author  aleksey.n.bykov@gmail.com

@@ -1,6 +1,6 @@
 package alekseybykov.portfolio.springboot.component.repository;
 
-import alekseybykov.portfolio.springboot.component.entities.Person;
+import alekseybykov.portfolio.springboot.component.domain.Person;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**

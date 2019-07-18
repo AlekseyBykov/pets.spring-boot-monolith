@@ -1,6 +1,6 @@
 package alekseybykov.portfolio.springboot.component.service;
 
-import alekseybykov.portfolio.springboot.component.rest.api.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
