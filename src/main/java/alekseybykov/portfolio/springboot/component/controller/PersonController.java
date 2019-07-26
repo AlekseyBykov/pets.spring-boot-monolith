@@ -1,5 +1,7 @@
 package alekseybykov.portfolio.springboot.component.controller;
 
+import alekseybykov.portfolio.springboot.component.domain.Person;
+import alekseybykov.portfolio.springboot.component.mapping.PersonMapper;
 import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import alekseybykov.portfolio.springboot.component.response.Response;
@@ -7,11 +9,9 @@ import alekseybykov.portfolio.springboot.component.service.PersonService;
 
 import com.google.common.base.Preconditions;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,20 +23,18 @@ import java.util.Objects;
  * @since   2019-06-11
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("person")
 public class PersonController {
 
     private final PersonService personService;
-
-    @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
+    private final PersonMapper personMapper;
 
     @GetMapping("list")
-    public Response getAllPersonsByPage(@RequestParam(value = "page") final Integer page,
-                                        @RequestParam(value = "size") final Integer size) {
-        return ResponseAPI.positiveResponse(personService.fetchPersonsByPages(page, size));
+    public Page<PersonDTO> getAllPersonsByPage(@RequestParam(value = "page") final Integer page,
+                                               @RequestParam(value = "size") final Integer size) {
+        Page<Person> data = personService.fetchPersonsByPages(page, size);
+        return new PageImpl<>(personMapper.toDtoList(data.getContent()), data.getPageable(), data.getTotalElements());
     }
 
     @PostMapping("add")
