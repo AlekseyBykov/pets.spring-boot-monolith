@@ -34,9 +34,9 @@ public class PersonController {
     }
 
     @GetMapping("list")
-    public Response getAllPersonsByPage(@PageableDefault(size = 10) @SortDefault(sort = "firstName",
-            direction = Sort.Direction.DESC) Pageable pageable) {
-        return ResponseAPI.positiveResponse(personService.getAllPersons(pageable));
+    public Response getAllPersonsByPage(@RequestParam(value = "page") final Integer page,
+                                        @RequestParam(value = "size") final Integer size) {
+        return ResponseAPI.positiveResponse(personService.fetchPersonsByPages(page, size));
     }
 
     @PostMapping("add")

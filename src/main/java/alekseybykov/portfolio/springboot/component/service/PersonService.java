@@ -1,8 +1,8 @@
 package alekseybykov.portfolio.springboot.component.service;
 
+import alekseybykov.portfolio.springboot.component.domain.Person;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 /**
  * @author  aleksey.n.bykov@gmail.com
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface PersonService {
 
-    Page<PersonDTO> getAllPersons(Pageable pageable);
+    Page<Person> fetchPersonsByPages(Integer page, Integer size);
 
     PersonDTO getPersonById(Long personId);
 

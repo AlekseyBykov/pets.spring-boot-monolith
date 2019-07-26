@@ -25,6 +25,54 @@ public class RestClient {
         client.readPerson();
         client.updatePerson();
         client.deletePerson();
+
+        // Testing pagination
+        for(long i = 0; i < 100; i++) {
+            client.createPersonWithAssignedId(i);
+        }
+
+        client.getFirstPageWithTenElements();
+    }
+
+    private void createPersonWithAssignedId(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = format("%s/%s", contextPath, "person/add");
+
+        PersonDTO dto = PersonDTO.builder()
+                .id(id)
+                .firstName(format("%s%03d", "A", id))
+                .lastName(format("%s%03d", "B", id))
+                .build();
+
+        restTemplate.exchange(url, HttpMethod.POST, AuthUtil.createEntityWithBasicAuth(
+            dto, MediaType.ALL, username, password), String.class);
+    }
+
+    private void getFirstPageWithTenElements() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = format("%s/%s", contextPath, "person/list?page=0&size=10");
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
+                url, HttpMethod.GET, AuthUtil.createEntityWithBasicAuth(
+                        null, MediaType.ALL, username, password), String.class);
+        Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
+
+        // Should print <200,{"statusCode":"OK","message":"",
+        // "result":{"content":
+        // [{"id":0,"firstName":"A000","lastName":"B000"},
+        // {"id":1,"firstName":"A001","lastName":"B001"},
+        // {"id":2,"firstName":"A002","lastName":"B002"},
+        // {"id":3,"firstName":"A003","lastName":"B003"},
+        //
+        // SKIPPED ...
+        //
+        // {"id":9,"firstName":"A009","lastName":"B009"}],
+        // "pageable":{"sort":{"sorted":false,"unsorted":true,"empty":true},"offset":0,"pageNumber":0,"pageSize":10,
+        // "paged":true,"unpaged":false},"totalElements":100,
+        // "last":false,"totalPages":10,"size":10,"number":0,"sort":{"sorted":false,"unsorted":true,"empty":true},
+        // "numberOfElements":10,"first":true,"empty":false}},
+        // [ Additional headers here ...]>
+        System.out.println(responseEntity.toString());
     }
 
     private void createPerson() {
