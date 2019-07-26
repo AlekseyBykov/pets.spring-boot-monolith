@@ -32,6 +32,7 @@ public class RestClient {
         }
 
         client.getFirstPageWithTenElements();
+        client.getFirstPageWithFifteenElements();
     }
 
     private void createPersonWithAssignedId(Long id) {
@@ -57,21 +58,147 @@ public class RestClient {
                         null, MediaType.ALL, username, password), String.class);
         Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
 
-        // Should print <200,{"statusCode":"OK","message":"",
-        // "result":{"content":
-        // [{"id":0,"firstName":"A000","lastName":"B000"},
-        // {"id":1,"firstName":"A001","lastName":"B001"},
-        // {"id":2,"firstName":"A002","lastName":"B002"},
-        // {"id":3,"firstName":"A003","lastName":"B003"},
+        // Should print <200, {
+        //  "statusCode": "OK",
+        //  "message": "",
+        //  "result": {
+        //    "content": [
+        //      {
+        //        "id": 0,
+        //        "firstName": "A000",
+        //        "lastName": "B000"
+        //      },
+        //      {
+        //        "id": 1,
+        //        "firstName": "A001",
+        //        "lastName": "B001"
+        //      },
+        //      {
+        //        "id": 2,
+        //        "firstName": "A002",
+        //        "lastName": "B002"
+        //      },
         //
         // SKIPPED ...
         //
-        // {"id":9,"firstName":"A009","lastName":"B009"}],
-        // "pageable":{"sort":{"sorted":false,"unsorted":true,"empty":true},"offset":0,"pageNumber":0,"pageSize":10,
-        // "paged":true,"unpaged":false},"totalElements":100,
-        // "last":false,"totalPages":10,"size":10,"number":0,"sort":{"sorted":false,"unsorted":true,"empty":true},
-        // "numberOfElements":10,"first":true,"empty":false}},
-        // [ Additional headers here ...]>
+        //      {
+        //        "id": 8,
+        //        "firstName": "A008",
+        //        "lastName": "B008"
+        //      },
+        //      {
+        //        "id": 9,
+        //        "firstName": "A009",
+        //        "lastName": "B009"
+        //      }
+        //    ],
+        //    "pageable": {
+        //      "sort": {
+        //        "sorted": false,
+        //        "unsorted": true,
+        //        "empty": true
+        //      },
+        //      "offset": 0,
+        //      "pageSize": 10,
+        //      "pageNumber": 0,
+        //      "unpaged": false,
+        //      "paged": true
+        //    },
+        //    "totalElements": 100,
+        //    "totalPages": 10,
+        //    "last": false,
+        //    "size": 10,
+        //    "number": 0,
+        //    "sort": {
+        //      "sorted": false,
+        //      "unsorted": true,
+        //      "empty": true
+        //    },
+        //    "numberOfElements": 10,
+        //    "first": true,
+        //    "empty": false
+        //  }
+        //},
+        // [ Additional headers skipped here ...]>
+        System.out.println(responseEntity.toString());
+    }
+
+    private void getFirstPageWithFifteenElements() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = format("%s/%s", contextPath, "person/list?page=0&size=15");
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
+                url, HttpMethod.GET, AuthUtil.createEntityWithBasicAuth(
+                        null, MediaType.ALL, username, password), String.class);
+        Preconditions.checkState(responseEntity.getStatusCode().is2xxSuccessful());
+
+        // Should print <200, {
+        //  "statusCode": "OK",
+        //  "message": "",
+        //  "result": {
+        //    "content": [
+        //      {
+        //        "id": 0,
+        //        "firstName": "A000",
+        //        "lastName": "B000"
+        //      },
+        //      {
+        //        "id": 1,
+        //        "firstName": "A001",
+        //        "lastName": "B001"
+        //      },
+        //      {
+        //        "id": 2,
+        //        "firstName": "A002",
+        //        "lastName": "B002"
+        //      },
+        //      {
+        //        "id": 3,
+        //        "firstName": "A003",
+        //        "lastName": "B003"
+        //      },
+        //
+        // SKIPPED ...
+        //
+        //      {
+        //        "id": 13,
+        //        "firstName": "A013",
+        //        "lastName": "B013"
+        //      },
+        //      {
+        //        "id": 14,
+        //        "firstName": "A014",
+        //        "lastName": "B014"
+        //      }
+        //    ],
+        //    "pageable": {
+        //      "sort": {
+        //        "sorted": false,
+        //        "unsorted": true,
+        //        "empty": true
+        //      },
+        //      "offset": 0,
+        //      "pageSize": 15,
+        //      "pageNumber": 0,
+        //      "unpaged": false,
+        //      "paged": true
+        //    },
+        //    "totalElements": 100,
+        //    "totalPages": 7,
+        //    "last": false,
+        //    "size": 15,
+        //    "number": 0,
+        //    "sort": {
+        //      "sorted": false,
+        //      "unsorted": true,
+        //      "empty": true
+        //    },
+        //    "numberOfElements": 15,
+        //    "first": true,
+        //    "empty": false
+        //  }
+        //},
+        // [ Additional headers skipped here ...]>
         System.out.println(responseEntity.toString());
     }
 
