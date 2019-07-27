@@ -7,51 +7,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 
 /**
- * Unit test for service: testing the Business layer in isolation from other layers.
+ * Clean Unit test for service: testing the Business layer in isolation from other layers
+ * and without Spring context.
  *
- * Used @MockBean for bypassing the actual
+ * Used mock() for bypassing the actual
  * dependency from the Data layer.
+ *
+ * Injects mock bean through constructor (lombok annotation).
  *
  * @author  aleksey.n.bykov@gmail.com
  * @version 1.0
  * @since   2019-07-14
  */
-@RunWith(SpringRunner.class)
 public class PersonServiceUnitTest {
-
-    @TestConfiguration
-    static class EmployeeServiceImplTestContextConfiguration {
-        @Bean
-        public PersonService personService() {
-            return new PersonServiceImpl();
-        }
-    }
-
-    @Autowired
-    private PersonService personService;
 
     // initialized through the initFields(...) method
     private JacksonTester<PersonDTO> jacksonTester;
 
-    @MockBean
-    private PersonRepository personRepository;
+    private PersonRepository personRepository = mock(PersonRepository.class);
+
+    private PersonService personService = new PersonServiceImpl(personRepository);
 
     @Before
     public void setup() {

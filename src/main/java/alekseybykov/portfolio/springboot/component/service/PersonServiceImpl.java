@@ -4,6 +4,7 @@ import alekseybykov.portfolio.springboot.component.domain.Person;
 import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,11 +22,10 @@ import java.util.*;
  */
 @Slf4j
 @Service
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
     @Override
     @Transactional(readOnly = true)
