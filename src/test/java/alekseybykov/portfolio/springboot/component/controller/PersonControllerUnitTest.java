@@ -4,6 +4,7 @@ import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import alekseybykov.portfolio.springboot.component.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +61,8 @@ public class PersonControllerUnitTest {
         JacksonTester.initFields(this, new ObjectMapper());
 
         // --- behaviour for mocked dependency ---
-        PersonDTO personDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
-        PersonDTO updatedPersonDTO = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        PersonDTO personDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
+        PersonDTO updatedPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
 
         Mockito.when(personService.addPerson(personDTO))
                 .thenReturn(personDTO);
@@ -85,43 +86,43 @@ public class PersonControllerUnitTest {
     public void testCRUD() {
 
         // --- create person ---
-        PersonDTO personDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
+        PersonDTO personDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
         mvc.perform(post("/person/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(jacksonTester.write(personDTO).getJson()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result.id", is(1)))
+                .andExpect(jsonPath("$.result.id", is(NumberUtils.INTEGER_ONE)))
                 .andExpect(jsonPath("$.result.firstName", is("A")))
                 .andExpect(jsonPath("$.result.lastName", is("B")));
 
         // --- read person ---
-        mvc.perform(get("/person/get/" + 1L)
+        mvc.perform(get("/person/get/" + NumberUtils.LONG_ONE)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result.id", is(1)))
+                .andExpect(jsonPath("$.result.id", is(NumberUtils.INTEGER_ONE)))
                 .andExpect(jsonPath("$.result.firstName", is("A")))
                 .andExpect(jsonPath("$.result.lastName", is("B")));
 
         // --- update person ---
-        PersonDTO updatedPersonDTO = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        PersonDTO updatedPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
         mvc.perform(put("/person/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(jacksonTester.write(updatedPersonDTO).getJson()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result.id", is(1)))
+                .andExpect(jsonPath("$.result.id", is(NumberUtils.INTEGER_ONE)))
                 .andExpect(jsonPath("$.result.firstName", is("C")))
                 .andExpect(jsonPath("$.result.lastName", is("D")));
 
         // --- delete person ---
-        mvc.perform(delete("/person/delete/" + 1L)
+        mvc.perform(delete("/person/delete/" + NumberUtils.LONG_ONE)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result", hasSize(0)));
+                .andExpect(jsonPath("$.result", hasSize(NumberUtils.INTEGER_ZERO)));
     }
 }

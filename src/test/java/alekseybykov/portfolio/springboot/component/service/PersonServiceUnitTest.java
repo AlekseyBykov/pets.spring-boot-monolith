@@ -5,6 +5,7 @@ import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -45,19 +46,19 @@ public class PersonServiceUnitTest {
         JacksonTester.initFields(this, new ObjectMapper());
 
         // --- behaviour for mocked dependency ---
-        Optional<Person> foundedPerson = Optional.of(new Person(1L, "A", "B"));
-        Mockito.when(personRepository.findById(1L))
+        Optional<Person> foundedPerson = Optional.of(new Person(NumberUtils.LONG_ONE, "A", "B"));
+        Mockito.when(personRepository.findById(NumberUtils.LONG_ONE))
                 .thenReturn(foundedPerson);
 
-        Person createdPerson = new Person(1L, "A", "B");
+        Person createdPerson = new Person(NumberUtils.LONG_ONE, "A", "B");
         Mockito.when(personRepository.save(createdPerson))
                 .thenReturn(createdPerson);
 
-        Person updatedPerson = new Person(1L, "C", "D");
+        Person updatedPerson = new Person(NumberUtils.LONG_ONE, "C", "D");
         Mockito.when(personRepository.save(updatedPerson))
                 .thenReturn(updatedPerson);
 
-        Person deletedPerson = new Person(1L, null, null);
+        Person deletedPerson = new Person(NumberUtils.LONG_ONE, null, null);
 
         doAnswer((Answer<Void>) invocation -> {
             Object[] args = invocation.getArguments();
@@ -71,7 +72,7 @@ public class PersonServiceUnitTest {
     public void testCRUD() {
         // --- create person ---
         // given
-        PersonDTO personDTO = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
+        PersonDTO personDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
         // when
         PersonDTO createdPersonDTO = personService.addPerson(personDTO);
         // then
@@ -80,14 +81,14 @@ public class PersonServiceUnitTest {
 
         // --- read person ---
         // when
-        PersonDTO foundedPersonDTO = personService.getPersonById(1L);
+        PersonDTO foundedPersonDTO = personService.getPersonById(NumberUtils.LONG_ONE);
         // then
         assertThat(jacksonTester.write(foundedPersonDTO).getJson())
                 .isEqualTo(jacksonTester.write(createdPersonDTO).getJson());
 
         // --- update person ---
         // given
-        PersonDTO personDtoForUpdate = PersonDTO.builder().id(1L).firstName("C").lastName("D").build();
+        PersonDTO personDtoForUpdate = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
         // when
         PersonDTO updatePersonDTO = personService.updatePerson(personDtoForUpdate);
         // then
@@ -95,7 +96,7 @@ public class PersonServiceUnitTest {
                 .isEqualTo(jacksonTester.write(personDtoForUpdate).getJson());
 
         // --- delete ---
-        Person personDtoForDelete = new Person(1L, null, null);
+        Person personDtoForDelete = new Person(NumberUtils.LONG_ONE, null, null);
         // when
         personService.deletePerson(personDtoForDelete.getId());
         // then

@@ -3,6 +3,7 @@ package alekseybykov.portfolio.springboot.component.consumer;
 import alekseybykov.portfolio.springboot.component.consumer.dto.PersonDTO;
 import alekseybykov.portfolio.springboot.component.consumer.util.AuthUtil;
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -207,7 +208,7 @@ public class RestClient {
         String url = format("%s/%s", contextPath, "person/add");
 
         PersonDTO dto = PersonDTO.builder()
-                .id(1L)
+                .id(NumberUtils.LONG_ONE)
                 .firstName("A")
                 .lastName("B")
                 .build();
@@ -239,7 +240,7 @@ public class RestClient {
         String url = format("%s/%s", contextPath, "person/update");
 
         PersonDTO dto = PersonDTO.builder()
-                .id(1L)
+                .id(NumberUtils.LONG_ONE)
                 .firstName("C")
                 .lastName("D")
                 .build();

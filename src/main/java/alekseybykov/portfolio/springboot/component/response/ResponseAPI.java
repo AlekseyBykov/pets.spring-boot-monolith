@@ -1,9 +1,5 @@
 package alekseybykov.portfolio.springboot.component.response;
 
-import alekseybykov.portfolio.springboot.component.response.NegativeResponse;
-import alekseybykov.portfolio.springboot.component.response.PositiveResponse;
-import alekseybykov.portfolio.springboot.component.response.StatusCode;
-
 import java.util.Collections;
 
 /**

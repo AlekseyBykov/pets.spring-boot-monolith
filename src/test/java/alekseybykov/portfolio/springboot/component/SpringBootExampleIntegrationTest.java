@@ -5,6 +5,7 @@ import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import alekseybykov.portfolio.springboot.component.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,14 +58,14 @@ public class SpringBootExampleIntegrationTest {
     @Test
     @SneakyThrows
     public void testLayersIntegration() {
-        PersonDTO dto = PersonDTO.builder().id(1L).firstName("A").lastName("B").build();
+        PersonDTO dto = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
         mvc.perform(post("/person/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(jacksonTester.write(dto).getJson()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result.id", is(1)))
+                .andExpect(jsonPath("$.result.id", is(NumberUtils.INTEGER_ONE)))
                 .andExpect(jsonPath("$.result.firstName", is("A")))
                 .andExpect(jsonPath("$.result.lastName", is("B")));
     }
