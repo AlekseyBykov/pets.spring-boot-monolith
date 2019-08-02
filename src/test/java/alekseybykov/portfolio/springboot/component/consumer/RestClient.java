@@ -4,7 +4,9 @@ import alekseybykov.portfolio.springboot.component.consumer.dto.PersonDTO;
 import alekseybykov.portfolio.springboot.component.consumer.util.AuthUtil;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import static java.lang.String.format;

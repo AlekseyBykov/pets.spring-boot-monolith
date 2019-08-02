@@ -1,14 +1,12 @@
 package alekseybykov.portfolio.springboot.component.controller;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
-import alekseybykov.portfolio.springboot.component.mapping.PersonMapper;
-import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.mapping.PersonMapper;
 import alekseybykov.portfolio.springboot.component.response.Response;
+import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
 import alekseybykov.portfolio.springboot.component.service.PersonService;
-
 import com.google.common.base.Preconditions;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

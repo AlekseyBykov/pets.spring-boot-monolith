@@ -1,6 +1,8 @@
 package alekseybykov.portfolio.springboot.component.consumer.util;
 
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import static java.util.Collections.singletonList;
 

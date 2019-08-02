@@ -1,8 +1,8 @@
 package alekseybykov.portfolio.springboot.component.service;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
-import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Optional;
 
 /**
  * @author  aleksey.n.bykov@gmail.com

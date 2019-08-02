@@ -1,15 +1,13 @@
 package alekseybykov.portfolio.springboot.component.advice;
 
-import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
 import alekseybykov.portfolio.springboot.component.response.NegativeResponse;
+import alekseybykov.portfolio.springboot.component.response.ResponseAPI;
 import alekseybykov.portfolio.springboot.component.response.StatusCode;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 

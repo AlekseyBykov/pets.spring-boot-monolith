@@ -1,7 +1,7 @@
 package alekseybykov.portfolio.springboot.component;
 
-import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import alekseybykov.portfolio.springboot.component.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
