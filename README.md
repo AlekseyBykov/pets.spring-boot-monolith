@@ -12,7 +12,7 @@ Includes:
 * Actuator for system monitoring
 * HAL Browser for visualization Actuator's data
 * Separate client for consuming secured endpoints
-* Conversions between persistence-backed POJOs and DTOs by using MapStruct and manually
+* Conversions between persistence-backed POJOs and DTOs by using MapStruct
 * Pagination by using Spring Data JPA
 * Configured Logback for store log messages and archiving old log files
 * Glogal exceptions handler
