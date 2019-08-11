@@ -10,9 +10,4 @@ import org.mapstruct.Mapper;
  * @since   2019-07-26
  */
 @Mapper(componentModel = "spring")
-public interface PersonMapper extends BaseMapper<Person, PersonDTO> {
-
-    PersonDTO toDto(Person entity);
-
-    Person toEntity(PersonDTO dto);
-}
+public interface PersonMapper extends BaseMapper<Person, PersonDTO> { }

@@ -1,6 +1,5 @@
 package alekseybykov.portfolio.springboot.component.dto;
 
-import alekseybykov.portfolio.springboot.component.domain.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,10 +26,4 @@ public class PersonDTO {
 
     @NotNull(message = "Person's last name cannot be empty")
     private String lastName;
-
-    public PersonDTO(Person person) {
-        setId(person.getId());
-        setFirstName(person.getFirstName());
-        setLastName(person.getLastName());
-    }
 }

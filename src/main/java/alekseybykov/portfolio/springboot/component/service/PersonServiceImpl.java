@@ -1,7 +1,7 @@
 package alekseybykov.portfolio.springboot.component.service;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
-import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.exceptions.PersonNotFoundException;
 import alekseybykov.portfolio.springboot.component.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * @author  aleksey.n.bykov@gmail.com
@@ -34,29 +32,29 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @Transactional(readOnly = true)
-    public PersonDTO getPersonById(Long personId) {
-        Optional<Person> person = personRepository.findById(personId);
-        return person.map(PersonDTO::new).orElse(null);
+    public Person getPersonById(Long id) {
+        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found"));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public PersonDTO addPerson(PersonDTO personDTO) {
-        Person person = new Person(personDTO);
-        return new PersonDTO(personRepository.save(person));
+    public Person addPerson(Person person) {
+        return personRepository.save(person);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public PersonDTO updatePerson(PersonDTO personDTO) {
-        Person person = new Person(personDTO);
-        return new PersonDTO(personRepository.save(person));
+    public Person updatePerson(Long id, Person person) {
+        Person foundedPerson = getPersonById(id);
+        foundedPerson.setFirstName(person.getFirstName());
+        foundedPerson.setLastName(person.getLastName());
+        return personRepository.save(foundedPerson);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deletePerson(Long personId) {
-        Person person = new Person(getPersonById(personId));
-        personRepository.delete(person);
+    public void deletePerson(Long id) {
+        Person foundedPerson = getPersonById(id);
+        personRepository.delete(foundedPerson);
     }
 }

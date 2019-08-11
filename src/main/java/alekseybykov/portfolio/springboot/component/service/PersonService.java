@@ -1,7 +1,6 @@
 package alekseybykov.portfolio.springboot.component.service;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
-import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import org.springframework.data.domain.Page;
 
 /**
@@ -13,11 +12,11 @@ public interface PersonService {
 
     Page<Person> fetchPersonsByPages(Integer page, Integer size);
 
-    PersonDTO getPersonById(Long personId);
+    Person getPersonById(Long id);
 
-    PersonDTO addPerson(PersonDTO personDTO);
+    Person addPerson(Person person);
 
-    PersonDTO updatePerson(PersonDTO personDTO);
+    Person updatePerson(Long id, Person person);
 
-    void deletePerson(Long personId);
+    void deletePerson(Long id);
 }

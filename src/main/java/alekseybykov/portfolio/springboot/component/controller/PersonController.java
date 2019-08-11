@@ -16,6 +16,9 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 /**
+ * The controller communicates with the clients by using DTO (with JSON (de)serialization).
+ * DTO is not used in other layers.
+ *
  * @author  aleksey.n.bykov@gmail.com
  * @version 1.0
  * @since   2019-06-11
@@ -38,19 +41,24 @@ public class PersonController {
     @PostMapping("add")
     public Response addPerson(@RequestBody @Valid PersonDTO personDTO) {
         Preconditions.checkState(Objects.nonNull(personDTO), "Persons details must be specified");
-        return ResponseAPI.positiveResponse(personService.addPerson(personDTO));
+        Person person = personMapper.toEntity(personDTO);
+        return ResponseAPI.positiveResponse(personService.addPerson(person));
     }
 
     @GetMapping("get/{id}")
     public Response getPersonByIdByUsingPathParam(@PathVariable("id") Long id) {
         Preconditions.checkState(Objects.nonNull(id), "Persons id must be specified");
-        return ResponseAPI.positiveResponse(personService.getPersonById(id));
+        Person person = personService.getPersonById(id);
+        return ResponseAPI.positiveResponse(personMapper.toDto(person));
     }
 
     @PutMapping("update")
-    public Response updatePerson(@RequestBody @Valid PersonDTO personDTO) {
+    public Response updatePerson(@RequestParam(value = "id") Long id,
+                                 @RequestBody @Valid PersonDTO personDTO) {
+        Preconditions.checkState(Objects.nonNull(id), "Persons id must be specified");
         Preconditions.checkState(Objects.nonNull(personDTO), "Persons details must be specified");
-        return ResponseAPI.positiveResponse(personService.updatePerson(personDTO));
+        Person person = personMapper.toEntity(personDTO);
+        return ResponseAPI.positiveResponse(personService.updatePerson(id, person));
     }
 
     @DeleteMapping("delete/{id}")

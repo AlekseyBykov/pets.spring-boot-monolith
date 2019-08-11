@@ -1,6 +1,8 @@
 package alekseybykov.portfolio.springboot.component.controller;
 
+import alekseybykov.portfolio.springboot.component.domain.Person;
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
+import alekseybykov.portfolio.springboot.component.mapping.PersonMapper;
 import alekseybykov.portfolio.springboot.component.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -21,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 
+import static java.lang.String.format;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.doAnswer;
@@ -50,6 +53,9 @@ public class PersonControllerUnitTest {
     @MockBean
     private PersonService personService;
 
+    @MockBean
+    private PersonMapper personMapper;
+
     // initialized through the initFields(...) method
     private JacksonTester<PersonDTO> jacksonTester;
 
@@ -59,22 +65,34 @@ public class PersonControllerUnitTest {
 
         // --- behaviour for mocked dependency ---
         PersonDTO personDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
+        Person person = Person.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
+
         PersonDTO updatedPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
+        Person updatedPerson = Person.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
 
-        Mockito.when(personService.addPerson(personDTO))
+        Mockito.when(personMapper.toEntity(personDTO))
+                .thenReturn(person);
+
+        Mockito.when(personMapper.toEntity(updatedPersonDTO))
+                .thenReturn(updatedPerson);
+
+        Mockito.when(personMapper.toDto(person))
                 .thenReturn(personDTO);
 
-        Mockito.when(personService.getPersonById(personDTO.getId()))
-                .thenReturn(personDTO);
+        Mockito.when(personService.addPerson(person))
+                .thenReturn(person);
 
-        Mockito.when(personService.updatePerson(updatedPersonDTO))
-                .thenReturn(updatedPersonDTO);
+        Mockito.when(personService.getPersonById(person.getId()))
+                .thenReturn(person);
+
+        Mockito.when(personService.updatePerson(NumberUtils.LONG_ONE, updatedPerson))
+                .thenReturn(updatedPerson);
 
         doAnswer((Answer<Void>) invocation -> {
             Object[] args = invocation.getArguments();
             System.out.println("Person entity was deleted. Called with the following arguments: " + Arrays.toString(args));
             return null;
-        }).when(personService).deletePerson(personDTO.getId());
+        }).when(personService).deletePerson(person.getId());
     }
 
     @WithMockUser("USER")
@@ -105,7 +123,7 @@ public class PersonControllerUnitTest {
 
         // --- update person ---
         PersonDTO updatedPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
-        mvc.perform(put("/person/update")
+        mvc.perform(put(format("%s=%d", "/person/update?id", NumberUtils.LONG_ONE))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(jacksonTester.write(updatedPersonDTO).getJson()))
@@ -116,7 +134,7 @@ public class PersonControllerUnitTest {
                 .andExpect(jsonPath("$.result.lastName", is("D")));
 
         // --- delete person ---
-        mvc.perform(delete("/person/delete/" + NumberUtils.LONG_ONE)
+        mvc.perform(delete(format("%s%d", "/person/delete/", NumberUtils.LONG_ONE))
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

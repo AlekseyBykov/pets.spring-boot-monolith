@@ -1,7 +1,6 @@
 package alekseybykov.portfolio.springboot.component.repository;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
-import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -44,7 +43,7 @@ public class PersonRepositoryUnitTest {
 //    private TestEntityManager em;
 
     // initialized through the initFields(...) method
-    private JacksonTester<PersonDTO> jacksonTester;
+    private JacksonTester<Person> jacksonTester;
 
     @Before
     public void setup() {
@@ -62,16 +61,14 @@ public class PersonRepositoryUnitTest {
 
         // given
         Person person = new Person(NumberUtils.LONG_ONE, "A", "B");
-        PersonDTO createdPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("A").lastName("B").build();
-
         // when
         Person createdPerson = personRepository.save(person);
         // then
         assertThat(createdPerson.getId()).isEqualTo(NumberUtils.LONG_ONE);
         assertThat(createdPerson.getFirstName()).isEqualTo("A");
         assertThat(createdPerson.getLastName()).isEqualTo("B");
-        assertThat(jacksonTester.write(new PersonDTO(createdPerson)).getJson())
-                .isEqualTo(jacksonTester.write(createdPersonDTO).getJson());
+        assertThat(jacksonTester.write(createdPerson).getJson())
+                .isEqualTo(jacksonTester.write(createdPerson).getJson());
 
         // --- read person ---
 
@@ -82,29 +79,28 @@ public class PersonRepositoryUnitTest {
         assertThat(foundedPerson.getFirstName()).isEqualTo("A");
         assertThat(foundedPerson.getLastName()).isEqualTo("B");
 
-        PersonDTO foundedPersonDTO = new PersonDTO(foundedPerson);
-        assertThat(jacksonTester.write(createdPersonDTO).getJson())
-                .isEqualTo(jacksonTester.write(foundedPersonDTO).getJson());
+        assertThat(jacksonTester.write(createdPerson).getJson())
+                .isEqualTo(jacksonTester.write(foundedPerson).getJson());
 
         // --- update person ---
 
         // given
-        PersonDTO updatedPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
+        Person personForUpdate = Person.builder().id(NumberUtils.LONG_ONE).firstName("C").lastName("D").build();
         // when
-        Person updatedPerson = personRepository.save(new Person(updatedPersonDTO));
+        Person updatedPerson = personRepository.save(personForUpdate);
         // then
         assertThat(updatedPerson.getId()).isEqualTo(NumberUtils.LONG_ONE);
         assertThat(updatedPerson.getFirstName()).isEqualTo("C");
         assertThat(updatedPerson.getLastName()).isEqualTo("D");
-        assertThat(jacksonTester.write(updatedPersonDTO).getJson())
-                .isEqualTo(jacksonTester.write(new PersonDTO(updatedPerson)).getJson());
+        assertThat(jacksonTester.write(personForUpdate).getJson())
+                .isEqualTo(jacksonTester.write(updatedPerson).getJson());
 
         // --- delete person ---
 
         // given
-        PersonDTO deletedPersonDTO = PersonDTO.builder().id(NumberUtils.LONG_ONE).build();
+        Person personForDelete = Person.builder().id(NumberUtils.LONG_ONE).build();
         // when
-        personRepository.delete(new Person(deletedPersonDTO));
+        personRepository.delete(personForDelete);
         // then
         Optional<Person> deletedPerson = personRepository.findById(NumberUtils.LONG_ONE);
         assertFalse(deletedPerson.isPresent());

@@ -1,8 +1,7 @@
 package alekseybykov.portfolio.springboot.component.domain;
 
-import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
-import com.google.common.base.Preconditions;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author  aleksey.n.bykov@gmail.com
@@ -18,6 +16,7 @@ import javax.validation.constraints.NotNull;
  * @since   2019-06-11
  */
 @Data
+@Builder
 @Table
 @Entity
 @NoArgsConstructor
@@ -31,12 +30,4 @@ public class Person {
 
     @Column
     private String lastName;
-
-    public Person(@NotNull PersonDTO personDTO) {
-        Preconditions.checkNotNull(personDTO);
-
-        setId(personDTO.getId());
-        setFirstName(personDTO.getFirstName());
-        setLastName(personDTO.getLastName());
-    }
 }

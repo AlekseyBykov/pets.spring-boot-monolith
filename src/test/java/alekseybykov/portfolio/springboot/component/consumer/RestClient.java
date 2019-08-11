@@ -239,7 +239,7 @@ public class RestClient {
 
     private void updatePerson() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = format("%s/%s", contextPath, "person/update");
+        String url = format("%s/%s=%d", contextPath, "person/update?id", NumberUtils.LONG_ONE);
 
         PersonDTO dto = PersonDTO.builder()
                 .id(NumberUtils.LONG_ONE)
