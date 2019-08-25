@@ -1,5 +1,5 @@
 # spring-boot-monolith
-An example of Spring Boot monolith application in the Layered Architecture: secured RESTful endpoints and separate command-line CRUD client. Monolith component provides some business functions as services over the web. These services can be accessed through the URL from independent deployable Web UI, mobile application, polyglot clients, etc.
+An example of Spring Boot monolith application with using Layered Architecture: secured RESTful endpoints and separate command-line CRUD client. Monolith component provides some business functions as services over the web. These services can be accessed through the URL from independent deployable Web UI, mobile application, polyglot clients, etc.
 
 Represents the Application tier(known as *backend*) in three-tier design. Typical layered architecture: API calls is processed from the Controller layer to the Persistence layer through the Service layer.
 
