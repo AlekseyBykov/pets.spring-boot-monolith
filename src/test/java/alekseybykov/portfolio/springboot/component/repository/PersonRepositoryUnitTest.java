@@ -24,8 +24,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
  *
  * Actually, there is no need to testing functionality, provided by Spring Data.
  *
- * replace = NONE is needed for using the same
- * MS SQL database.
+ * replace = NONE is needed for using the same database.
  *
  * @author  aleksey.n.bykov@gmail.com
  * @version 1.0
