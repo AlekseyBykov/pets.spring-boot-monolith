@@ -5,6 +5,8 @@ Represents the Application tier(known as *backend*) in three-tier design. Typica
 
 The component can be represented as a *microservice*(should be amended accordingly for using in event-driven architecture).
 
+Code is scanned by SonarLint according to appropriate quality profiles.
+
 Includes: 
 
 * Secured endpoints by using Basic Authentication
