@@ -1,3 +1,6 @@
+//
+// Feel free to use these solutions in your work.
+//
 package alekseybykov.portfolio.springboot.component.service;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
