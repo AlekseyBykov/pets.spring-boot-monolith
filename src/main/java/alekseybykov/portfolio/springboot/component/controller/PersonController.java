@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.controller;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
@@ -21,10 +18,6 @@ import java.util.Objects;
 /**
  * The controller communicates with the clients by using DTO (with JSON (de)serialization).
  * DTO is not used in other layers.
- *
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-06-11
  */
 @RestController
 @RequiredArgsConstructor

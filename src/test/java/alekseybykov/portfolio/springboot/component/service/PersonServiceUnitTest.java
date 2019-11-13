@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.service;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
@@ -29,10 +26,6 @@ import static org.mockito.Mockito.mock;
  * dependency from the Data layer.
  *
  * Injects mock bean through constructor (lombok annotation).
- *
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-07-14
  */
 public class PersonServiceUnitTest {
 

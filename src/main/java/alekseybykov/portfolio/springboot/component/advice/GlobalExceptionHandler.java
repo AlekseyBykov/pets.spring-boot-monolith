@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.advice;
 
 import alekseybykov.portfolio.springboot.component.response.NegativeResponse;
@@ -16,11 +13,6 @@ import java.util.Optional;
 
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
-/**
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-07-12
- */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

@@ -1,13 +1,5 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.exceptions;
 
-/**
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-08-10
- */
 public class PersonNotFoundException extends RuntimeException {
     public PersonNotFoundException() {}
 

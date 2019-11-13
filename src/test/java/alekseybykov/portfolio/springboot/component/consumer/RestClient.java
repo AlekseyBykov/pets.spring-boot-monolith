@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.consumer;
 
 import alekseybykov.portfolio.springboot.component.consumer.dto.PersonDTO;
@@ -14,11 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import static java.lang.String.format;
 
-/**
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-06-11
- */
 public class RestClient {
     private final static String username = "user";
     private final static String password = "user";

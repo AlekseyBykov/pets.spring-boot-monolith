@@ -1,15 +1,7 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.response;
 
 import lombok.Getter;
 
-/**
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-07-10
- */
 @Getter
 public enum StatusCode {
     OK(0),

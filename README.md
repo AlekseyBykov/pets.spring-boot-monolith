@@ -28,5 +28,3 @@ request method | request | headers | request body | response |
 **GET**  | `http://localhost:8080/application/person/get/1` | User-Agent: Fiddler<br>Accept: application/json<br>Authorization: Basic dXNlcjp1c2Vy<br>Host: localhost:8080 | | `{"statusCode":"OK","message":"","result":{"id":1,"firstName":"A","lastName":"B"}}` |
 **PUT**  | `http://localhost:8080/application/person/update` | User-Agent: Fiddler<br>Content-type: application/json<br>Authorization: Basic dXNlcjp1c2Vy<br>Host: localhost:8080 | `{ "id":1, "firstName":"C", "lastName":"D" }` | `{"statusCode":"OK","message":"","result":{"id":1,"firstName":"C","lastName":"D"}}` |
 **DELETE** | `http://localhost:8080/application/person/delete/1` | User-Agent: Fiddler<br>Accept: application/json<br>Authorization: Basic dXNlcjp1c2Vy<br>Host: localhost:8080 | | `{"statusCode":"OK","message":"","result":[]}` |   
-
-Feel free to use these solutions in your work.

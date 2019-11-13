@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.mapping;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
@@ -16,11 +13,6 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-08-01
- */
 public class PersonMapperTest {
 
     private PersonMapper mapper;

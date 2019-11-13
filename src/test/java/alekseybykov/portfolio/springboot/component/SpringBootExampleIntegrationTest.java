@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component;
 
 import alekseybykov.portfolio.springboot.component.dto.PersonDTO;
@@ -30,10 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Testing layers integration, end-to-end.
  * No mocks is used.
- *
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-07-15
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.MOCK, classes = SpringBootExample.class)

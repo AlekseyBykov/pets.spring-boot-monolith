@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.controller;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
@@ -41,10 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * Used @MockBean for bypassing the actual
  * dependency from the Business layer.
- *
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-07-14
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(PersonController.class)

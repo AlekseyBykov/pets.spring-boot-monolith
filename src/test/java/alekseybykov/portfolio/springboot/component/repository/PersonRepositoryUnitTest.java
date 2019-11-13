@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.repository;
 
 import alekseybykov.portfolio.springboot.component.domain.Person;
@@ -28,10 +25,6 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
  * Actually, there is no need to testing functionality, provided by Spring Data.
  *
  * replace = NONE is needed for using the same database.
- *
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-07-13
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest

@@ -1,6 +1,3 @@
-//
-// Feel free to use these solutions in your work.
-//
 package alekseybykov.portfolio.springboot.component.configuration;
 
 import org.springframework.context.annotation.Bean;
@@ -16,12 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  *  Raw API docs: http://localhost:8080/application/v2/api-docs
  *  Swagger UI: http://localhost:8080/application/swagger-ui.htm
- *
- * @author  aleksey.n.bykov@gmail.com
- * @version 1.0
- * @since   2019-06-11
  */
-
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
