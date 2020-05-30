@@ -2,6 +2,10 @@ package alekseybykov.portfolio.springboot.component.response;
 
 import java.util.Collections;
 
+/**
+ * @author Aleksey Bykov
+ * @since 10.07.2019
+ */
 public class ResponseAPI {
     private ResponseAPI() { }
 

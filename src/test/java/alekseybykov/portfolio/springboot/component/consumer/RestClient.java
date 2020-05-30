@@ -11,6 +11,10 @@ import org.springframework.web.client.RestTemplate;
 
 import static java.lang.String.format;
 
+/**
+ * @author Aleksey Bykov
+ * @since 27.06.2019
+ */
 public class RestClient {
     private final static String username = "user";
     private final static String password = "user";

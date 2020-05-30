@@ -26,6 +26,9 @@ import static org.mockito.Mockito.mock;
  * dependency from the Data layer.
  *
  * Injects mock bean through constructor (lombok annotation).
+ *
+ * @author Aleksey Bykov
+ * @since 14.07.2019
  */
 public class PersonServiceUnitTest {
 

@@ -32,6 +32,13 @@
     <description>An example of Spring Boot monolith application with using Layered Architecture: secured RESTful endpoints and separate command-line CRUD client.</description>
     <url>https://alekseybykov.github.io</url>
 
+    <developers>
+        <developer>
+            <name>Aleksey Bykov</name>
+            <email>aleksey.n.bykov@gmail.com</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

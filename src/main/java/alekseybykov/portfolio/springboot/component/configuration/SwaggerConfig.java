@@ -13,6 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  *  Raw API docs: http://localhost:8080/application/v2/api-docs
  *  Swagger UI: http://localhost:8080/application/swagger-ui.htm
+ *
+ * @author Aleksey Bykov
+ * @since 23.06.2019
  */
 @Configuration
 @EnableSwagger2

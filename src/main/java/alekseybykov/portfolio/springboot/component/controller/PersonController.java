@@ -18,6 +18,9 @@ import java.util.Objects;
 /**
  * The controller communicates with the clients by using DTO (with JSON (de)serialization).
  * DTO is not used in other layers.
+ *
+ * @author Aleksey Bykov
+ * @since 10.07.2019
  */
 @RestController
 @RequiredArgsConstructor

@@ -2,6 +2,10 @@ package alekseybykov.portfolio.springboot.component.response;
 
 import lombok.Getter;
 
+/**
+ * @author Aleksey Bykov
+ * @since 10.07.2019
+ */
 @Getter
 public enum StatusCode {
     OK(0),

@@ -6,6 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
+/**
+ * @author Aleksey Bykov
+ * @since 10.07.2019
+ */
 @Getter
 @RequiredArgsConstructor
 public abstract class Response implements Serializable {

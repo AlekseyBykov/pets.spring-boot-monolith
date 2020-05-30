@@ -6,6 +6,10 @@ import org.springframework.http.MediaType;
 
 import static java.util.Collections.singletonList;
 
+/**
+ * @author Aleksey Bykov
+ * @since 08.07.2019
+ */
 public class  AuthUtil {
     public static <T> HttpEntity<T> createEntityWithBasicAuth(T body, MediaType mediaType,
             String username, String password) {

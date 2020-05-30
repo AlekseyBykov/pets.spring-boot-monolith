@@ -13,6 +13,10 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Aleksey Bykov
+ * @since 01.08.2019
+ */
 public class PersonMapperTest {
 
     private PersonMapper mapper;

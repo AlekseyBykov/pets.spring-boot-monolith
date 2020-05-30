@@ -38,6 +38,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * Used @MockBean for bypassing the actual
  * dependency from the Business layer.
+ *
+ * @author Aleksey Bykov
+ * @since 14.07.2019
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(PersonController.class)

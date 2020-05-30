@@ -13,6 +13,10 @@ import java.util.Optional;
 
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
+/**
+ * @author Aleksey Bykov
+ * @since 17.07.2019
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

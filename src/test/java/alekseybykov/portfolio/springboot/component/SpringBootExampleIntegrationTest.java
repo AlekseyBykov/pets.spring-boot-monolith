@@ -27,6 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Testing layers integration, end-to-end.
  * No mocks is used.
+ *
+ * @author Aleksey Bykov
+ * @since 15.07.2019
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.MOCK, classes = SpringBootExample.class)
